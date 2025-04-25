@@ -1,0 +1,44 @@
+spring:
+  config:
+    import: vault://
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:postgresql://172.29.195.92:5432/openai_framework_dev
+    username: ${SPRING_DATASOURCE_USERNAME:}
+    password: ${SPRING_DATASOURCE_PASSWORD:}
+  data:
+    redis:
+      host: 172.29.195.92
+      port: 6379
+      password: 
+  cloud:
+    vault:
+      authentication: TOKEN
+      scheme: http
+      enabled: true
+      fail-fast: true
+      uri: ${VAULT_URI:http://127.0.0.1:8200}
+      token: ${VAULT_TOKEN:}
+      config:
+        enabled: false
+      kv:
+        enabled: true
+        backend: secret
+        default-context: application
+    compatibility-verifier:
+      enabled: false
+
+openai:
+  api:
+    url: https://api.openai.com/v1
+    key: ${OPENAI_API_KEY:}
+    model: gpt-3.5-turbo
+    timeout: 30000
+  context:
+    file-path: classpath:context/default-context.yaml
+
+logging:
+  level:
+    com.example: DEBUG
+    org.springframework.web: DEBUG

@@ -1,0 +1,29 @@
+spring:
+  config:
+    activate:
+      on-profile: client-a
+  datasource:
+    url: jdbc:postgresql://localhost:5432/openai_framework_client_a
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
+  data:
+    redis:
+      host: ${SPRING_REDIS_HOST:localhost}
+      port: ${SPRING_REDIS_PORT:6379}
+      password: ${SPRING_REDIS_PASSWORD:}
+  cloud:
+    vault:
+      enabled: ${VAULT_ENABLED:false}
+
+openai:
+  api:
+    url: https://api.openai.com/v1
+    key: ${OPENAI_API_KEY:sk-client-a-key-example}
+    model: gpt-4
+    timeout: 45000
+  context:
+    file-path: classpath:context/client-a-context.yaml
+
+logging:
+  level:
+    com.example: INFO

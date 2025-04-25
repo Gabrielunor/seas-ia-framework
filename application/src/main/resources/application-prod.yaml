@@ -1,0 +1,37 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+  data:
+    redis:
+      host: ${SPRING_REDIS_HOST}
+      port: ${SPRING_REDIS_PORT}
+      password: ${SPRING_REDIS_PASSWORD}
+  cloud:
+    vault:
+      enabled: true
+      uri: ${VAULT_URI}
+      token: ${VAULT_TOKEN}
+      kv:
+        enabled: true
+        backend: secret
+        default-context: application
+
+openai:
+  api:
+    url: ${OPENAI_API_URL}
+    key: ${OPENAI_API_KEY}
+    model: ${OPENAI_API_MODEL:gpt-4}
+    timeout: ${OPENAI_API_TIMEOUT:60000}
+  context:
+    file-path: ${OPENAI_CONTEXT_FILE_PATH}
+
+logging:
+  level:
+    root: INFO
+    com.example: INFO
+    org.springframework.web: WARN
